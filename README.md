@@ -1,144 +1,112 @@
 # 🎙️ claude-qwen-tts
 
-Qwen3-TTS based high-quality Korean/multilingual text-to-speech plugin for Claude Code.
+Qwen3-TTS 기반 고품질 한국어/다국어 음성 합성 Claude Code 플러그인
 
-[한국어 문서](README_KO.md)
+[English](README_EN.md)
 
-## ✨ Features
+## 개요
 
-- **Voice Clone** - Clone voice from reference audio
-- **Voice Design** - Create virtual voices from text descriptions
-- **Script to Audio** - Convert markdown/text scripts to narration
-- **Auto Detection** - Claude automatically recognizes TTS requests
+Claude Code에서 TTS 관련 작업을 시작하면, 스킬이 자동으로 활성화되어 음성을 생성합니다. "이 대본 읽어줘", "TTS로 변환해줘" 같은 요청을 자연스럽게 처리합니다.
 
-## 🚀 Quick Start
+## 설치
 
-### 1. Install Plugin
+### 1. Marketplace 등록
 
-```
-/install claude-qwen-tts@HariFatherKR
+```bash
+/plugin marketplace add HariFatherKR/claude-qwen-tts
 ```
 
-### 2. Setup Environment
+### 2. 플러그인 설치
 
+```bash
+/plugin install claude-qwen-tts@claude-qwen-tts
 ```
+
+### 3. 환경 구축
+
+```bash
 /tts-setup
 ```
 
-This will:
-- Create Python virtual environment
-- Install required packages (torch, qwen-tts, etc.)
-- Download TTS models (~4-6GB)
+Python 가상환경 생성, 패키지 설치, 모델 다운로드를 자동으로 진행합니다.
 
-### 3. Initialize Configuration
+### 4. 초기 설정
 
-```
+```bash
 /tts-init
 ```
 
-Interactive setup for:
-- Reference voice selection (default samples or your own)
-- Output directory configuration
+대화형으로 레퍼런스 음성과 출력 폴더를 설정합니다.
 
-### 4. Generate Speech!
+## 주요 기능
 
-```
-/tts "Hello, this is a test"
-```
+| 기능 | 설명 |
+|------|------|
+| Voice Clone | 레퍼런스 음성을 복제하여 TTS 생성 |
+| Voice Design | 텍스트 설명으로 가상 목소리 생성 |
+| Script to Audio | 마크다운/텍스트 대본을 나레이션으로 변환 |
+| 자동 인식 | Claude가 TTS 요청을 자동으로 인식 |
 
-## 📋 Commands
+## 명령어
 
-| Command | Description | Example |
-|---------|-------------|---------|
-| `/tts` | Text to speech (voice clone) | `/tts "안녕하세요"` |
-| `/tts-design` | Generate with designed voice | `/tts-design "Hello" --voice "calm female"` |
-| `/tts-script` | Convert script file to audio | `/tts-script script.md` |
-| `/tts-setup` | Setup environment | `/tts-setup` |
-| `/tts-init` | Interactive configuration | `/tts-init` |
+| 명령어 | 설명 | 예시 |
+|--------|------|------|
+| `/tts` | 텍스트 → 음성 | `/tts "안녕하세요 여러분"` |
+| `/tts-design` | 가상 목소리로 생성 | `/tts-design "안녕" --voice "따뜻한 남성"` |
+| `/tts-script` | 대본 파일 → 음성 | `/tts-script script.md` |
+| `/tts-setup` | 환경 구축 | `/tts-setup` |
+| `/tts-init` | 대화형 설정 | `/tts-init` |
 
-### /tts Options
+### /tts 옵션
 
-```
-/tts "text" [--output file.wav] [--voice ref.wav]
-```
-
-- `--output`, `-o`: Output file path
-- `--voice`, `-v`: Alternative reference voice
-
-### /tts-design Options
-
-```
-/tts-design "text" --voice "description" [--lang Korean] [--output file.wav]
+```bash
+/tts "텍스트" [--output file.wav] [--voice ref.wav]
 ```
 
-- `--voice`, `-v`: Voice description (Chinese recommended for best results)
-- `--lang`, `-l`: Language (Korean, English, Chinese, Japanese, Cantonese)
-- `--output`, `-o`: Output file path
+### /tts-design 옵션
 
-### /tts-script Options
-
+```bash
+/tts-design "텍스트" --voice "목소리 설명" [--lang Korean] [--output file.wav]
 ```
+
+### /tts-script 옵션
+
+```bash
 /tts-script script.md [--output file.wav] [--pause 0.8] [--speed 1.0]
 ```
 
-- `--output`, `-o`: Output file path
-- `--pause`: Silence between paragraphs (seconds)
-- `--speed`: Playback speed ratio
+## 요구사항
 
-## 🎤 Sample Voices
+- **Python**: 3.10 이상
+- **디스크 공간**: 약 8GB (모델용)
+- **GPU**: 권장 (Apple Silicon MPS 또는 NVIDIA CUDA)
+- **CPU**: 지원하지만 느림
 
-Default sample voices are included (CC0 license):
-- `ko_male.wav` - Korean male voice
-- `ko_female.wav` - Korean female voice
+## 지원 언어
 
-To use your own voice:
-1. Prepare a 5-10 second WAV recording
-2. Run `/tts-init` and select "Register my own voice"
+- 한국어 (Korean)
+- 영어 (English)
+- 중국어 (Chinese)
+- 일본어 (Japanese)
+- 광동어 (Cantonese)
 
-## ⚙️ Requirements
+## 샘플 음성
 
-- **Python**: 3.10+
-- **Disk Space**: ~8GB (for models)
-- **GPU**: Recommended (Apple Silicon MPS or NVIDIA CUDA)
-- **CPU**: Supported but slower
+기본 제공 샘플 (CC0 라이선스):
+- `ko_male.wav` - 한국어 남성 목소리
+- `ko_female.wav` - 한국어 여성 목소리
 
-## 🔧 Supported Devices
+본인 목소리 사용: `/tts-init` 실행 후 "내 음성 파일 등록" 선택
 
-| Device | Support | Notes |
-|--------|---------|-------|
-| Apple Silicon (MPS) | ✅ | Recommended for Mac |
-| NVIDIA GPU (CUDA) | ✅ | Recommended |
-| CPU | ✅ | Slower performance |
+## 크레딧
 
-## 📁 File Structure
+- [Qwen3-TTS](https://github.com/QwenLM/Qwen3-TTS) - Alibaba의 TTS 모델
+- [Claude Code](https://claude.ai/code) - Anthropic의 AI 코딩 어시스턴트
 
-```
-~/.config/claude-qwen-tts/
-├── venv/              # Python virtual environment
-├── scripts/           # TTS runner scripts
-├── samples/           # Sample voice files
-└── config.yaml        # User configuration
-```
-
-## 🌐 Supported Languages
-
-- Korean (한국어)
-- English
-- Chinese (中文)
-- Japanese (日本語)
-- Cantonese (粤语)
-
-## 📄 License
+## 라이선스
 
 MIT License
 
-## 🙏 Credits
+## 이슈 & 기여
 
-- [Qwen3-TTS](https://github.com/QwenLM/Qwen3-TTS) - Base TTS model by Alibaba
-- [Claude Code](https://claude.ai/code) - AI coding assistant by Anthropic
-
-## 🐛 Issues & Contributions
-
-Please report issues at [GitHub Issues](https://github.com/HariFatherKR/claude-qwen-tts/issues)
-
-Pull requests are welcome!
+이슈는 [GitHub Issues](https://github.com/HariFatherKR/claude-qwen-tts/issues)에 등록해주세요.
