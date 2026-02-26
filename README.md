@@ -19,7 +19,7 @@ Claude Code에서 TTS 관련 작업을 시작하면, 스킬이 자동으로 활�
 ### 2. 플러그인 설치
 
 ```bash
-/plugin install claude-qwen-tts@claude-qwen-tts
+/plugin install claude-qwen-tts@leessju
 ```
 
 ### 3. 환경 구축
