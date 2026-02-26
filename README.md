@@ -13,7 +13,7 @@ Claude Code에서 TTS 관련 작업을 시작하면, 스킬이 자동으로 활�
 ### 1. Marketplace 등록
 
 ```bash
-/plugin marketplace add HariFatherKR/claude-qwen-tts
+/plugin marketplace add leessju/claude-qwen-tts
 ```
 
 ### 2. 플러그인 설치
@@ -109,4 +109,4 @@ MIT License
 
 ## 이슈 & 기여
 
-이슈는 [GitHub Issues](https://github.com/HariFatherKR/claude-qwen-tts/issues)에 등록해주세요.
+이슈는 [GitHub Issues](https://github.com/leessju/claude-qwen-tts/issues)에 등록해주세요.
